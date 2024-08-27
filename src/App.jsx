@@ -6,10 +6,11 @@ import Footer from "./components/footer";
 import { InstagramLoader } from "./components/instaconload";
 import { GitIcon } from "./components/devicons";
 import RecipeList from "./Recipe/recipe";
+import { FakeStore } from "./Recipe/fakestore";
 function App() {
   return (
     <>
-      <RecipeList/>
+      <FakeStore/>
     </>
   );
 }

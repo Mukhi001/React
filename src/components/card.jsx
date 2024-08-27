@@ -3,19 +3,19 @@ import Card from 'react-bootstrap/Card';
 import { Spinn } from './spinn';
 import Toast from './toast';
 
-function Cardd() {
+function Cardd(props) {
+  const {source,key,title,description,price}=props
   return (
     <Card style={{ width: '18rem',border:'2px solid' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Img variant="top" src={source} />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{title}</Card.Title>
         <Spinn/>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+         {description}
         </Card.Text>
        <Toast/>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="primary">{price}</Button>
       </Card.Body>
     </Card>
   );
