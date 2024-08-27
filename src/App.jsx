@@ -5,13 +5,11 @@ import DefaultCarousel from "./components/carousel";
 import Footer from "./components/footer";
 import { InstagramLoader } from "./components/instaconload";
 import { GitIcon } from "./components/devicons";
+import RecipeList from "./Recipe/recipe";
 function App() {
   return (
     <>
-      <NavBar />
-      <DefaultCarousel/>
-      <ClassComponent></ClassComponent>
-      <Footer/>
+      <RecipeList/>
     </>
   );
 }
