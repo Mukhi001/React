@@ -4,7 +4,7 @@ import { Spinn } from './spinn';
 import Toast from './toast';
 
 function Cardd(props) {
-  const {source,key,title,description,price}=props
+  const {source,key,title,description,price}=props;
   return (
     <Card style={{ width: '18rem',border:'2px solid' }}>
       <Card.Img variant="top" src={source} />

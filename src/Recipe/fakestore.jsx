@@ -7,6 +7,7 @@ export class FakeStore extends Component {
   state = {
     products: [],
     category: [],
+    product:[],
     isLoading: true,
   };
 
@@ -19,7 +20,7 @@ export class FakeStore extends Component {
     const { data, status } = await axios.get(
       `https://fakestoreapi.com/products`
     );
-    console.log(data);
+    
 
     if (status === 200) {
       this.setState({
@@ -33,7 +34,7 @@ export class FakeStore extends Component {
     const { data, status } = await axios.get(
       `https://fakestoreapi.com/products/categories`
     );
-    console.log(data);
+   
 
     if (status === 200) {
       this.setState({
@@ -50,6 +51,7 @@ export class FakeStore extends Component {
       this.fetchCategoryProducts(selectedCategory);
     }
   };
+  
 
   fetchCategoryProducts = async (selected) => {
     const { data, status } = await axios.get(
@@ -63,6 +65,16 @@ export class FakeStore extends Component {
     }
   };
 
+  handler = async (select) => {
+    
+
+   
+      this.setState({
+        product: select,
+      });
+    
+  };
+
   render() {
     return (
       <>
@@ -70,9 +82,7 @@ export class FakeStore extends Component {
           <Spinn />
         ) : (
           <>
-            <div
-              style={{ display: "flex", justifyContent: "center", gap: "10px" }}
-            >
+            <div>
               {this.state.category.map((eachCategory) => {
                 return (
                   <>
@@ -92,26 +102,36 @@ export class FakeStore extends Component {
                 );
               })}
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "10px",
-                justifyContent: "center",
-              }}
-            >
+            <div style={{display:"flex"}}>
+            <div>
               {this.state.products.map((eachItem) => {
+                
                 return (
-                  <Cardd
+                  <div key={eachItem.id} onClick={()=>this.handler(eachItem)}>
+                  <Cardd 
                     key={eachItem.id}
                     title={eachItem.title}
                     source={eachItem.image}
                     description={eachItem.description}
                     price={`$ ${eachItem.price}`}
                   />
+                  </div>
                 );
+                
               })}
             </div>
+
+            <div>
+          {
+            
+              
+                <Cardd key={this.state.product.id} title={this.state.product.title} source={this.state.product.image} description={this.state.product.description} price={this.state.product.price}/>
+              
+            
+          }
+      </div>
+            </div>
+           
           </>
         )}
       </>
