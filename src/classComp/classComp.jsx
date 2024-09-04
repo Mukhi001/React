@@ -1,59 +1,93 @@
 import { Component } from "react";
 import { BasicCard } from "../components/card";
 import { Button } from "react-bootstrap";
+import { BsLightbulb } from "react-icons/bs";
+import axios from "axios"
 export class ClassComponent extends Component {
-  state = {
-    card: [
-      { name: "Tulasi", salary: 10000, role: "Angular dev" },
-      { name: "ranjith", salary: 20000, role: "React dev" },
-    ],
-  };
-
-  clickHandler = () => {
-    const newData = { name: "Mukesh", role: "Next js dev", salary: 2000 };
-    const updatedData = [...this.state.card, newData];
-
-    this.setState({
-      card: updatedData,
-    });
-  };
-
-  removeHandler = (val) => {
-    const filteredData = this.state.card.filter((_,id)=> id !== val)
-    this.setState({
-      card: filteredData,
-    });
-  };
+  state={
+    turn:true
+  }
+ 
+  handler=()=>{
+     this.setState({
+      turn:!this.state.turn
+     })
+  }
 
   render() {
     return (
       <>
-        <Button variant="primary" onClick={this.clickHandler}>
-          Add Data
-        </Button>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "4px",
-            justifyContent: "center",
-          }}
-        >
-          {this.state.card.map((eachEmployee, val) => {
-            return (
-              <div key={val}>
-                <BasicCard
-                  title={eachEmployee.name}
-                  description={eachEmployee.designation}
-                  value={"Delete"}
-                  ind={val}
-                  removeHandler={this.removeHandler}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </>
+  
+   {
+    
+    this.state.turn ?<> <button onClick={this.handler}>on</button> 
+    <BsLightbulb onClick={this.handler} style={{height:"100px" , width:"100px"}}/>
+    </>: <>
+    <button onClick={this.handler}>off</button>
+    <BsLightbulb onClick={this.handler} style={{backgroundColor:"yellow", height:"100px" , width:"100px"}}/>
+    </>
+   }
+    
+   
+
+    </>
     );
   }
+}
+
+
+export class TableComponent extends Component {
+
+state={
+  products:[]
+}
+   data=async ()=>{
+ const {data}=await axios.get('https://fakestoreapi.com/products')
+ console.log(data)
+
+ this.setState({
+  products:data
+ })
+  }
+  componentDidMount(){
+    this.data()
+  
+  }
+ 
+
+    render(){
+      return (
+        <>
+        <h3>hi</h3>
+        <table>
+          {
+            this.state.products.map(each=>{
+              return (
+                <>
+                 <tr>
+                        <td>{each.id}</td>
+                        <td>{each.description}</td>
+                        <td><img src={each.image}></img></td>
+                        <td>{each.title}</td>
+                        <td>{each.price}</td>
+                        <td>{each.category}</td>
+                       </tr>
+                </>
+
+              )
+                      
+            })
+
+          }
+          
+        </table>
+        
+        </>
+
+
+      )
+    }
+
+
+
 }

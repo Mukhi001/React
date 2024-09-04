@@ -1,6 +1,6 @@
 import Cardd from "./components/card"
 import NavBar from "./components/nav";
-import { ClassComponent } from "./classComp/classComp";
+import { ClassComponent, TableComponent } from "./classComp/classComp";
 import DefaultCarousel from "./components/carousel";
 import Footer from "./components/footer";
 import { InstagramLoader } from "./components/instaconload";
@@ -9,11 +9,15 @@ import RecipeList from "./Recipe/recipe";
 import { FakeStore } from "./Recipe/fakestore";
 import Counter from "./components/Hooks";
 import { DynamicTable } from "./Tasks/task1";
+import { BsLightbulb } from "react-icons/bs";
 function App() {
+  
   return (
     <>
-   <DynamicTable/>
+    <ClassComponent/>
+    <TableComponent/>
     </>
+   
   );
 }
 
