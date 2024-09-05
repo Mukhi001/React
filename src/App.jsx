@@ -10,12 +10,13 @@ import { FakeStore } from "./Recipe/fakestore";
 import Counter from "./components/Hooks";
 import { DynamicTable } from "./Tasks/task1";
 import { BsLightbulb } from "react-icons/bs";
+import Todo from "./hooks/setState";
 function App() {
   
   return (
     <>
-    <ClassComponent/>
-    <TableComponent/>
+ <Counter/>
+ <Todo/>
     </>
    
   );

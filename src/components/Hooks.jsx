@@ -18,7 +18,9 @@ const Counter=()=>{
 
             const Handler=(type)=>{
                 switch(type){
-                    case "INCR":setInterval(()=>setAge((age)=>age+1),1000);
+                    // case "INCR":setInterval(()=>setAge((age)=>age+1),1000);for automatic increment
+                    case "INCR":(setAge(age+1));
+
                     break;
                     case "DECR": setAge(age-1);
                     break;
