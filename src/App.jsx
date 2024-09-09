@@ -13,11 +13,12 @@ import { BsLightbulb } from "react-icons/bs";
 import Todo from "./hooks/setState";
 import UseRefExample from "./hooks/useref";
 import Uncontrolled from "./hooks/uncontrolled";
+import Controlled from "./hooks/controlled";
 function App() {
   
   return (
     <>
-<Uncontrolled/>
+<Controlled/>
     </>
    
   );
