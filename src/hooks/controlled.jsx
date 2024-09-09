@@ -10,13 +10,16 @@ function Controlled() {
     const [mobileNumber,setMobileNumber]=useState("")
     const [modelErr,setModelErr]=useState("")
     const [mobileErr,setMobileErr]=useState("")
+    const [complaint,setComplaint]=useState("")
+    const [dat,setData]=useState([])
+
 
  const modelHandler=(event)=>{
     const modelName=event.target.value;
     setModel(modelName)
-    console.log(modelName)
+    // console.log(modelName)
     const error=modelValidator(modelName)
-    console.log(error)
+    // console.log(error)
     if(error){
         setModelErr(error)
     }
@@ -31,19 +34,25 @@ function Controlled() {
     setMobileNumber(mobileNumber)
     
     const error=mobileValidator(mobileNumber)
-    console.log(error)
+    // console.log(error)
     if(error){
         setMobileErr(error)
     }
     else{
         setMobileErr("")
     }
+   
+ }
+
+ const complaintHandler=(event)=>{
+    const complaint=event.target.value;
+        setComplaint(complaint)
  }
 
 
-const modelValidator=(value)=>{
+ const modelValidator=(value)=>{
 let error=""
-const modelRegex=/^samsung/
+const modelRegex=/^samsung/i
 if(!value){
     error="please enter a samsung model"
 }
@@ -68,62 +77,124 @@ return error
      }
 
 
+
+
+
  const onSubmit=(event)=>{
     event.preventDefault();
+    var count=0;
     if(modelErr){
         alert("enter the proper model name")
+        count++
     }
     if(mobileErr){
         alert("enter the proper model name")
+        count++
     }
 
+   if(count==0){
+    const datar=async (modelName,mobileNumber,complaint)=>{
+        const response = await axios.post("https://cryptowebapp-10.onrender.com/details",{
+          
+            "model":modelName,
+            "mobile":mobileNumber,
+            "complaint":complaint
+        })
+
+        setData([...dat,response["data"]])
+        console.log(dat)
+    }
+
+   
+    datar(model,mobileNumber,complaint)
+   } 
+
+   
+    
+
  }
+
+
 
 
   return (
     <>
     <form onSubmit={onSubmit}>
-    <div className="form-group">
-        <h1>SAMSUNG SERVICE FORM</h1>
-      <label htmlFor="exampleInputEmail1">MODEL</label>
-      <input style={{borderRadius:"5px"}}
-        type="text"
-        placeholder="Enter Model Name"
-       value={model}
-       onChange={modelHandler}
-      />
-      <div>
-      {modelErr && <span style={{color:"red"}}>{modelErr}</span>}
-      </div>
+        <div className="form-group">
+          <label htmlFor="model">Model Name:</label>
+          <select
+            className="form-control"
+            id="model"
+            value={model}
+            onChange={modelHandler}
+          >
+            <option>Choose Samsung mobile model...</option>
+            <option>Samsung M31s</option>
+            <option>Samsung s24</option>
+            <option>Samsung A73</option>
+            <option>Samsung s23</option>
+          </select>
+          {modelErr && <span style={{ color: "red" }}>{modelErr}</span>}
+        </div>
 
+        <div className="form-group">
+          <label htmlFor="mobile">Mobile number:</label>
+          <input
+            type="number"
+            className="form-control"
+            id="mobile"
+            value={mobileNumber}
+            onChange={mobileHandler}
+          />
+          {mobileErr && <span style={{ color: "red" }}>{mobileErr}</span>}
+        </div>
 
+        <div className="form-group">
+          <label htmlFor="complaint">Complaint:</label>
+          <textarea
+            className="form-control"
+            id="complaint"
+            value={complaint}
+            onChange={complaintHandler}
+          />
+          
+        </div>
 
-     
-    </div>
-    <label htmlFor="exampleInputEmail1">MOBILE NUMBER</label>
-      <input style={{borderRadius:"5px"}}
-        type="text"
-        placeholder="Enter Model Name"
-       value={mobileNumber}
-       onChange={mobileHandler}
-      />
-      <div>
-      {mobileErr && <span style={{color:"red"}}>{mobileErr}</span>}
-      </div>
-
-   
-   
-   
-    <div>
-    <button type="submit" className="btn btn-primary">submit</button>
-    </div>
-
-    
-   
-      
-    
-  </form>
-
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+{
+    dat.length>0 ? (
+        <>
+          <Table>
+            <thead>
+              <tr>
+                <th>S.no</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {dat.map((eachPerson, index) => {
+                return (
+                  <tr key={eachPerson.index}>
+                    <td>{index + 1}</td>
+                    <td>{eachPerson.model}</td>
+                    <td>{eachPerson.mobile}</td>
+                    <td>{eachPerson.complaint}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </>
+      ):(
+        <></>
+      )
+}
+  
   </>
   );
 }
