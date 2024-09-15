@@ -15,11 +15,18 @@ import UseRefExample from "./hooks/useref";
 import Uncontrolled from "./hooks/uncontrolled";
 import Controlled from "./hooks/controlled";
 import DropDownn from "./hooks/dropdown";
+import NavigationStack from "./navigations/navigation-stack";
+import { BrowserRouter } from "react-router-dom";
+import { NaviBar } from "./navigations/navbar";
 function App() {
   
   return (
     <>
-<DropDownn/>
+     <BrowserRouter>
+     <NaviBar/>
+     <NavigationStack/>
+     </BrowserRouter>
+
     </>
    
   );
