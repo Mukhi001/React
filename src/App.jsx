@@ -18,14 +18,12 @@ import DropDownn from "./hooks/dropdown";
 import NavigationStack from "./navigations/navigation-stack";
 import { BrowserRouter } from "react-router-dom";
 import { NaviBar } from "./navigations/navbar";
+import { Parent } from "./hooks/useContext";
 function App() {
   
   return (
     <>
-     <BrowserRouter>
-     <NaviBar/>
-     <NavigationStack/>
-     </BrowserRouter>
+    <Parent/>
 
     </>
    
