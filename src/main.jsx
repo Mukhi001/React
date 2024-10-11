@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { UserContextProvider } from './components/context/userContext.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <UserContextProvider>
+  <StrictMode>
     <App />
-  </UserContextProvider>,
+  </StrictMode>,
 )

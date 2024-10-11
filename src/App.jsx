@@ -19,11 +19,13 @@ import NavigationStack from "./navigations/navigation-stack";
 import { BrowserRouter } from "react-router-dom";
 import { NaviBar } from "./navigations/navbar";
 import { Parent } from "./hooks/useContext";
+import { UseReducerr } from "./components/usereducer/useReducer";
+import { Final } from "./components/usereducer/advancedUseReducer";
 function App() {
   
   return (
     <>
-    <Parent/>
+    <Final/>
 
     </>
    
